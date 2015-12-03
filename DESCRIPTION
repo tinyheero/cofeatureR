@@ -3,6 +3,13 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person("Fong Chun", "Chan", email = "fongchunchan@gmail.com", role = c("aut", "cre"))
 Description: Generates a co-feature matrices
-Depends: R (>= 3.2.2)
-License: What license is it under?
+Depends: 
+	R (>= 3.1.0),
+	data.table (>= 1.9.4)
+Imports:
+	ggplot2 (>= 1.0.0),
+	dplyr (>= 0.4.3),
+	lazyeval (>= 0.1.10)
+URL: https://github.com/tinyheero/cofeatureR
+License: MIT + file LICENSE
 LazyData: true
