@@ -22,15 +22,15 @@
 #' @param missing.fill.col Color of the cell that has missing values
 #' @export
 #' @examples
-#' v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
-#' v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
-#' v3 <- c("Deletion", "Deletion", "SNV", "Rearrangement", "SNV", "Rearrangement", "SNV")
-#' feature.order <- c("RCOR1", "NCOR1", "LCOR")
-#' sample.id.order <- c("sampleA", "sampleB", "sampleC")
-#' in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3)
-#' fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
-#'
-#' plot_cofeature_mat(in.df)
+v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
+v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
+v3 <- c("Deletion", "Deletion", "SNV", "Rearrangement", "SNV", "Rearrangement", "SNV")
+feature.order <- c("RCOR1", "NCOR1", "LCOR")
+sample.id.order <- c("sampleA", "sampleB", "sampleC")
+in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3)
+fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
+
+plot_cofeature_mat(in.df)
 #' 
 #' # With black tile color
 #' plot_cofeature_mat(in.df, tile.col = "black")
@@ -135,12 +135,17 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   tmp.dt <- tmp.dt[, shift := (1:(.N))/.N - 1/(2 * .N) - 1/2, 
                  by = list(sampleID, feature)]
 
-  tmp.dt <- tmp.dt[, height := 1/.N, by = list(sampleID, feature)]
+  in.df <- dplyr::group_by_(in.df, sampleID, .dots = "feature")
+  in.df <- dplyr::mutate(in.df, shift = (1:n())/n() - 1/(2 * n()) - 1/2)
 
-  p1 <- ggplot2::ggplot(tmp.dt, ggplot2::aes(x = sampleID, 
-                                      y = feature + shift, 
-                                      height = height,
-                                      fill = type)) +
+  tmp.dt <- tmp.dt[, height := 1/.N, by = list(sampleID, feature)]
+  tmp.dt <- tmp.dt[, feature_shift := feature + shift]
+
+  p1 <- ggplot2::ggplot(tmp.dt, 
+                        ggplot2::aes_string(x = "sampleID", 
+                          y = "feature_shift", 
+                          height = "height",
+                          fill = "type")) +
     ggplot2::scale_y_discrete(limits = 1:length(feature.order), 
                               labels = feature.order) +
     ggplot2::ylab("Feature") +
@@ -157,8 +162,10 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   } else {
 
     # Plot two geom_tile. 1 for data present and 1 for data missing
-    filter.crit.1 <- lazyeval::interp(~ !is.na(type), .values = list(type = as.name("type")))
-    filter.crit.2 <- lazyeval::interp(~ is.na(type), .values = list(type = as.name("type")))
+    filter.crit.1 <- lazyeval::interp(~ !is.na(type), 
+                                      .values = list(type = as.name("type")))
+    filter.crit.2 <- lazyeval::interp(~ is.na(type), 
+                                      .values = list(type = as.name("type")))
 
     p1 <- p1 +
       ggplot2::geom_tile(data = dplyr::filter_(tmp.dt, filter.crit.1), 
