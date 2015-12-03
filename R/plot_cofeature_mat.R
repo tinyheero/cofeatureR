@@ -113,10 +113,15 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   if (type.display.mode == "single") {
     tmp.df <- unique(tmp.dt)
     tmp.df <- dplyr::as_data_frame(tmp.df)
-    tmp.df <- dplyr::mutate(tmp.df, 
-                            type = factor(type, levels = rev(type.order)))
-    tmp.df <- dplyr::group_by(tmp.df, sampleID, feature)
-    tmp.df <- dplyr::arrange(tmp.df, type)
+
+    mutate.call <- lazyeval::interp(~ factor(type, levels = rev(type.order)), 
+                                    type = as.name("type"))
+
+    tmp.df <- dplyr::mutate_(tmp.df, 
+                             .dots = setNames(list(mutate.call), "type"))
+
+    tmp.df <- dplyr::group_by_(tmp.df, .dots = c("sampleID", "feature"))
+    tmp.df <- dplyr::arrange_(tmp.df, .dots = c("type"))
     tmp.df <- dplyr::top_n(tmp.df, n = 1)
     tmp.dt <- data.table(tmp.df)
   }

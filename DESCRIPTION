@@ -1,15 +1,18 @@
 Package: cofeatureR
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("Fong Chun", "Chan", email = "fongchunchan@gmail.com", role = c("aut", "cre"))
-Description: Generates a co-feature matrices
+Title: Generate Cofeature Matrices
+Version: 0.0.0.9001
+Authors@R: 
+	person("Fong Chun", "Chan", , email = "fongchunchan@gmail.com", role = c("aut", "cre"))
+Description: Generate cofeature (feature by sample) matrices. The package 
+  utilizies ggplot2::geom_tile to generate the matrix allowing for easy
+  customization of additions from the base matrix.
 Depends: 
-	R (>= 3.1.0),
-	data.table (>= 1.9.4)
+  R (>= 3.1.0),
+  data.table (>= 1.9.4)
 Imports:
-	ggplot2 (>= 1.0.0),
-	dplyr (>= 0.4.3),
-	lazyeval (>= 0.1.10)
+  ggplot2 (>= 1.0.0),
+  dplyr (>= 0.4.3),
+  lazyeval (>= 0.1.10)
 URL: https://github.com/tinyheero/cofeatureR
 BugReports: https://github.com/tinyheero/cofeatureR/issues
 License: MIT + file LICENSE
