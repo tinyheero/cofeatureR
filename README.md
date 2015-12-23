@@ -2,8 +2,6 @@
 coFeatureR
 ==========
 
-------------------------------------------------------------------------
-
 coFeatureR is an R Package that provides functions for plotting CoFeature Matrices. For example:
 
 ``` r
@@ -28,8 +26,6 @@ plot_cofeature_mat(in.df)
 
 Installation
 ============
-
-------------------------------------------------------------------------
 
 To install the latest developmental version from github:
 
