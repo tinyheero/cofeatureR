@@ -1,6 +1,3 @@
-#' @import data.table
-NULL
-
 #' cofeatureR: Generate Cofeature Matrices
 #'
 #' Generate cofeature (feature by sample) matrices. The package 
