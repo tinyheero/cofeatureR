@@ -6,4 +6,5 @@
 #' 
 #' @docType package
 #' @name cofeatureR
+#' @importFrom stats setNames
 NULL
