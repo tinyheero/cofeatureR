@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 cofeatureR is an R Package that provides functions for plotting cofeature matrices (aka. sample-feature matrices). For example:
 
-```{r example, dev = "svg", echo = FALSE, message = FALSE}
+```{r example, dev = "png", echo = FALSE, message = FALSE}
 library("cofeatureR")
 v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
