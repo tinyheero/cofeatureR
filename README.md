@@ -1,12 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# cofeatureR
-=============
-
 coFeatureR is an R Package that provides functions for plotting CoFeature Matrices. For example:
 
-
-```r
+``` r
 library("cofeatureR")
 v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
@@ -24,14 +19,13 @@ plot_cofeature_mat(in.df)
 #> Setting sample order
 ```
 
-![plot of chunk example](README-example-1.png) 
+![](README-example-1.png)
 
-# Installation
+\# Installation
 ===============
 
 To install the latest developmental version from github:
 
-
-```r
+``` r
 devtools::install_github("tinyheero/tinyutils")
 ```
