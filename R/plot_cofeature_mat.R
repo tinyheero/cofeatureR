@@ -29,7 +29,7 @@
 #' sample.id.order <- c("sampleA", "sampleB", "sampleC")
 #' in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3)
 #' fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
-#'
+#'  
 #' plot_cofeature_mat(in.df)
 #' 
 #' # With black tile color
@@ -44,7 +44,7 @@
 #' 
 #' # Specify order of features, samples, and colors
 #' plot_cofeature_mat(in.df, feature.order, sample.id.order, 
-#'   fill.colors = fill.colors)
+#'    fill.colors = fill.colors)
 #'
 #' # Specify each cell can only have one "feature type"
 #' plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors = fill.colors,
@@ -79,13 +79,9 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
     }
   }
 
-  # Copy so that it doesn't change the in.df from the pass-in
-  in.dt <- data.table::data.table(in.df)
-  tmp.dt <- data.table::copy(in.dt)
-  
   if (missing(feature.order)) {
-    message("Detected no feature.order. Setting feature.order")
-    feature.order <- unique(tmp.dt[["feature"]])
+    message("Detected no feature.order. Specifying feature.order")
+    feature.order <- unique(in.df[["feature"]])
   } 
 
   if (length(unique(feature.order)) != length(feature.order)) {
@@ -95,10 +91,10 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   feature.order <- rev(feature.order)
 
   if (missing(sample.id.order)) {
-    message("Detected no sample.id.order. Setting sample.id.order")
-    sample.id.order <- unique(tmp.dt[["sampleID"]])
+    message("Detected no sample.id.order. Specifying sample.id.order")
+    sample.id.order <- unique(in.df[["sampleID"]])
   } else {
-    missing.samples <- setdiff(unique(tmp.dt[["sampleID"]]), sample.id.order)
+    missing.samples <- setdiff(unique(in.df[["sampleID"]]), sample.id.order)
     if (length(missing.samples) > 0) {
       warning(paste("sampleID in in.df not found in sample.id.order:", 
                     paste(missing.samples, collapse = ", ")))
@@ -106,43 +102,68 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   }
 
   if (missing(type.order)) {
-    message("Detected no type.order. Setting type.order")
-    type.order <- unique(tmp.dt[["type"]])
+    message("Detected no type.order. Specifying type.order")
+    type.order <- unique(in.df[["type"]])
   }
 
   if (type.display.mode == "single") {
-    tmp.df <- unique(tmp.dt)
-    tmp.df <- dplyr::as_data_frame(tmp.df)
+    message("Using type.display.mode single")
+    in.df <- dplyr::distinct_(in.df)
 
     mutate.call <- lazyeval::interp(~ factor(type, levels = rev(type.order)), 
-                                    type = as.name("type"))
+                                    type = as.name("type"),
+                                    type.order = as.name("type.order"))
 
-    tmp.df <- dplyr::mutate_(tmp.df, 
-                             .dots = setNames(list(mutate.call), "type"))
+    in.df <- dplyr::mutate_(in.df, 
+                            .dots = setNames(list(mutate.call), "type"))
 
-    tmp.df <- dplyr::group_by_(tmp.df, .dots = c("sampleID", "feature"))
-    tmp.df <- dplyr::arrange_(tmp.df, .dots = c("type"))
-    tmp.df <- dplyr::top_n(tmp.df, n = 1)
-    tmp.dt <- data.table(tmp.df)
+    in.df <- dplyr::group_by_(in.df, .dots = c("sampleID", "feature"))
+    in.df <- dplyr::arrange_(in.df, .dots = c("type"))
+    in.df <- dplyr::top_n(in.df, n = 1)
+    in.df <- dplyr::ungroup(in.df)
   }
 
-  # Set feature order
-  tmp.dt <- tmp.dt[, feature := as.numeric(factor(feature, 
-                                           levels = feature.order))]
+  message("Setting feature order")
+  mutate.call <- lazyeval::interp(~ as.numeric(
+                                      factor(feature, 
+                                             levels = rev(feature.order))),
+                                  feature = as.name("feature"))
+  in.df <- dplyr::mutate_(in.df, 
+                          .dots = setNames(list(mutate.call), "feature"))
 
   # Set sample order
-  tmp.dt <- tmp.dt[, sampleID := factor(sampleID, 
-                                 levels = sample.id.order)]
+  message("Setting sample order")
+  mutate.call <- lazyeval::interp(~ as.numeric(
+                                      factor(sampleID, 
+                                             levels = rev(sample.id.order))),
+                                  feature = as.name("sampleID"))
+  in.df <- dplyr::mutate_(in.df, 
+                          .dots = setNames(list(mutate.call), "sampleID"))
 
-  tmp.dt <- tmp.dt[, shift := (1:(.N))/.N - 1/(2 * .N) - 1/2, 
-                 by = list(sampleID, feature)]
+  # Calculate shift
+  in.df <- dplyr::group_by_(in.df, .dots = c("feature", "sampleID"))
+  mutate.call <- lazyeval::interp(~ (1:n())/n() - 
+                                  1/(2 * n()) - 1/2)
+  in.df <- dplyr::mutate_(in.df, 
+                          .dots = setNames(list(mutate.call), "shift"))
 
-  tmp.dt <- tmp.dt[, height := 1/.N, by = list(sampleID, feature)]
+  # Calculate height
+  mutate.call <- lazyeval::interp(~ 1/n())
+  in.df <- dplyr::mutate_(in.df, 
+                          .dots = setNames(list(mutate.call), "height"))
 
-  p1 <- ggplot2::ggplot(tmp.dt, ggplot2::aes(x = sampleID, 
-                                      y = feature + shift, 
-                                      height = height,
-                                      fill = type)) +
+  # Calculate feature_shift
+  mutate.call <- lazyeval::interp(~ feature + shift, 
+                                  feature = as.name("feature"),
+                                  shift = as.name("shift"))
+  in.df <- dplyr::mutate_(in.df, 
+                          .dots = setNames(list(mutate.call), "feature_shift"))
+
+  p1 <- ggplot2::ggplot(in.df, 
+                        ggplot2::aes_string(x = "sampleID", 
+                          y = "feature_shift", 
+                          height = "height",
+                          fill = "type")) +
     ggplot2::scale_y_discrete(limits = 1:length(feature.order), 
                               labels = feature.order) +
     ggplot2::ylab("Feature") +
@@ -165,9 +186,9 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                                       .values = list(type = as.name("type")))
 
     p1 <- p1 +
-      ggplot2::geom_tile(data = dplyr::filter_(tmp.dt, filter.crit.1), 
+      ggplot2::geom_tile(data = dplyr::filter_(in.df, filter.crit.1), 
                          color = tile.col, size = 1) +
-      ggplot2::geom_tile(data = dplyr::filter_(tmp.dt, filter.crit.2), 
+      ggplot2::geom_tile(data = dplyr::filter_(in.df, filter.crit.2), 
                          fill = missing.fill.col, color = tile.col, size = 1)
   }
 
