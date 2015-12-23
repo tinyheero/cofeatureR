@@ -29,7 +29,7 @@
 #' sample.id.order <- c("sampleA", "sampleB", "sampleC")
 #' in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3)
 #' fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
-#' 
+#'  
 #' plot_cofeature_mat(in.df)
 #' 
 #' # With black tile color
@@ -44,7 +44,7 @@
 #' 
 #' # Specify order of features, samples, and colors
 #' plot_cofeature_mat(in.df, feature.order, sample.id.order, 
-#'   fill.colors = fill.colors)
+#'    fill.colors = fill.colors)
 #'
 #' # Specify each cell can only have one "feature type"
 #' plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors = fill.colors,
@@ -80,7 +80,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   }
 
   if (missing(feature.order)) {
-    message("Detected no feature.order. Setting feature.order")
+    message("Detected no feature.order. Specifying feature.order")
     feature.order <- unique(in.df[["feature"]])
   } 
 
@@ -91,7 +91,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   feature.order <- rev(feature.order)
 
   if (missing(sample.id.order)) {
-    message("Detected no sample.id.order. Setting sample.id.order")
+    message("Detected no sample.id.order. Specifying sample.id.order")
     sample.id.order <- unique(in.df[["sampleID"]])
   } else {
     missing.samples <- setdiff(unique(in.df[["sampleID"]]), sample.id.order)
@@ -102,25 +102,29 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   }
 
   if (missing(type.order)) {
-    message("Detected no type.order. Setting type.order")
+    message("Detected no type.order. Specifying type.order")
     type.order <- unique(in.df[["type"]])
   }
 
   if (type.display.mode == "single") {
-    in.df <- dplyr::distinct(in.df)
+    message("Using type.display.mode single")
+    in.df <- dplyr::distinct_(in.df)
 
     mutate.call <- lazyeval::interp(~ factor(type, levels = rev(type.order)), 
-                                    type = as.name("type"))
+                                    type = as.name("type"),
+                                    type.order = as.name("type.order"))
 
     in.df <- dplyr::mutate_(in.df, 
-                             .dots = setNames(list(mutate.call), "type"))
+                            .dots = setNames(list(mutate.call), "type"))
 
     in.df <- dplyr::group_by_(in.df, .dots = c("sampleID", "feature"))
     in.df <- dplyr::arrange_(in.df, .dots = c("type"))
     in.df <- dplyr::top_n(in.df, n = 1)
+    in.df <- dplyr::ungroup(in.df)
   }
 
   # Set feature order
+  message("Setting feature order")
   mutate.call <- lazyeval::interp(~ as.numeric(
                                       factor(feature, 
                                              levels = rev(feature.order))),
@@ -129,6 +133,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                           .dots = setNames(list(mutate.call), "feature"))
 
   # Set sample order
+  message("Setting sample order")
   mutate.call <- lazyeval::interp(~ as.numeric(
                                       factor(sampleID, 
                                              levels = rev(sample.id.order))),
@@ -137,22 +142,23 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                           .dots = setNames(list(mutate.call), "sampleID"))
 
   # Calculate shift
-  in.df <- dplyr::group_by_(in.df, .dots = c("sampleID", "feature"))
-  in.df <- dplyr::mutate(in.df, 
-                         shift = (1:dplyr::n())/dplyr::n() - 
-                          1/(2 * dplyr::n()) - 1/2)
+  in.df <- dplyr::group_by_(in.df, .dots = c("feature", "sampleID"))
+  mutate.call <- lazyeval::interp(~ (1:n())/n() - 
+                                  1/(2 * n()) - 1/2)
+  in.df <- dplyr::mutate_(in.df, 
+                          .dots = setNames(list(mutate.call), "shift"))
 
   # Calculate height
   mutate.call <- lazyeval::interp(~ 1/n())
   in.df <- dplyr::mutate_(in.df, 
-                          .dots = setNames(list(mutate.call, "height")))
+                          .dots = setNames(list(mutate.call), "height"))
 
   # Calculate feature_shift
   mutate.call <- lazyeval::interp(~ feature + shift, 
                                   feature = as.name("feature"),
                                   shift = as.name("shift"))
   in.df <- dplyr::mutate_(in.df, 
-                          .dots = setNames(list(mutate.call, "feature_shift")))
+                          .dots = setNames(list(mutate.call), "feature_shift"))
 
   p1 <- ggplot2::ggplot(in.df, 
                         ggplot2::aes_string(x = "sampleID", 

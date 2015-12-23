@@ -62,7 +62,7 @@ plot_cofeature_mat(in.df, rotate.x.labels = 90)
 
 # Specify order of features, samples, and colors
 plot_cofeature_mat(in.df, feature.order, sample.id.order,
-  fill.colors = fill.colors)
+   fill.colors = fill.colors)
 
 # Specify each cell can only have one "feature type"
 plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors = fill.colors,
