@@ -14,11 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# coFeatureR
+# cofeatureR
 
-coFeatureR is an R Package that provides functions for plotting CoFeature Matrices. For example:
+cofeatureR is an R Package that provides functions for plotting cofeature matrices (aka. sample-feature matrices). For example:
 
-```{r example}
+```{r example, dev = "svg", echo = FALSE, message = FALSE}
 library("cofeatureR")
 v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
@@ -31,7 +31,19 @@ fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
 plot_cofeature_mat(in.df)
 ```
 
+Some features include:
+
+* Multiple types can be specified for a sample-feature
+* Custom colors for each type
+* Custom ordering of features and samples
+
 # Installation
+
+To get the released version from CRAN:
+
+```{r, eval = FALSE}
+install.packages("cofeatureR")
+```
 
 To install the latest developmental version from github:
 
