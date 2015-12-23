@@ -126,9 +126,11 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
     tmp.dt <- data.table(tmp.df)
   }
 
+  # Set feature order
   tmp.dt <- tmp.dt[, feature := as.numeric(factor(feature, 
                                            levels = feature.order))]
 
+  # Set sample order
   tmp.dt <- tmp.dt[, sampleID := factor(sampleID, 
                                  levels = sample.id.order)]
 
@@ -157,8 +159,10 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   } else {
 
     # Plot two geom_tile. 1 for data present and 1 for data missing
-    filter.crit.1 <- lazyeval::interp(~ !is.na(type), .values = list(type = as.name("type")))
-    filter.crit.2 <- lazyeval::interp(~ is.na(type), .values = list(type = as.name("type")))
+    filter.crit.1 <- lazyeval::interp(~ !is.na(type), 
+                                      .values = list(type = as.name("type")))
+    filter.crit.2 <- lazyeval::interp(~ is.na(type), 
+                                      .values = list(type = as.name("type")))
 
     p1 <- p1 +
       ggplot2::geom_tile(data = dplyr::filter_(tmp.dt, filter.crit.1), 
