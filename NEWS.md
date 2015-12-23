@@ -1,3 +1,3 @@
-# coFeatureR 1.0
+# coFeatureR 1.0.0
 
 * First major release of coFeatureR
