@@ -15,11 +15,11 @@ knitr::opts_chunk$set(
 ```
 
 # cofeatureR
-***
+=============
 
 coFeatureR is an R Package that provides functions for plotting CoFeature Matrices. For example:
 
-```{r}
+```{r example}
 library("cofeatureR")
 v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
@@ -33,12 +33,10 @@ plot_cofeature_mat(in.df)
 ```
 
 # Installation
-***
+===============
 
 To install the latest developmental version from github:
 
 ```{r, eval = FALSE}
 devtools::install_github("tinyheero/tinyutils")
 ```
-
-
