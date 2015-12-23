@@ -138,7 +138,9 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
 
   # Calculate shift
   in.df <- dplyr::group_by_(in.df, .dots = c("sampleID", "feature"))
-  in.df <- dplyr::mutate(in.df, shift = (1:n())/n() - 1/(2 * n()) - 1/2)
+  in.df <- dplyr::mutate(in.df, 
+                         shift = (1:dplyr::n())/dplyr::n() - 
+                          1/(2 * dplyr::n()) - 1/2)
 
   # Calculate height
   mutate.call <- lazyeval::interp(~ 1/n())
