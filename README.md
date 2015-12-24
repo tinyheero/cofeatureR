@@ -24,5 +24,5 @@ install.packages("cofeatureR")
 To install the latest developmental version from github:
 
 ``` r
-devtools::install_github("tinyheero/tinyutils")
+devtools::install_github("tinyheero/cofeatureR")
 ```
