@@ -8,12 +8,6 @@ cofeatureR is an R Package that provides functions for plotting cofeature matric
 
 ![](README-images/example-1.png)
 
-Some features include:
-
--   Multiple types can be specified for a feature-sample
--   Custom colors for each type
--   Custom ordering of features and samples
-
 Installation
 ============
 
@@ -63,46 +57,15 @@ knitr::kable(in.df)
 This input data.frame can now be used as input into `plot_cofeature_mat`:
 
 ``` r
-plot_cofeature_mat(in.df)
+plot_cofeature_mat(in.df, tile.col = "black")
 ```
 
 ![](README-images/how_to_use_example-1.png)
 
 Notice how we are NOT restricted to have only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
 
-Specifying the Order of Samples and Features
---------------------------------------------
+There are many different parameters that can be passed into the `plot_cofeature_mat` for customization of the plot. For instance
 
-You can control the order of the samples (columns) and features (rows) by making use of the `feature.order` and `sample.id.order` parameters. You just need to specify a character vector listening the order:
-
-``` r
-feature.order <- c("RCOR1", "NCOR1", "LCOR")
-sample.id.order <- c("sampleA", "sampleB", "sampleC")
-plot_cofeature_mat(in.df, feature.order = feature.order, 
-                   sample.id.order = sample.id.order)
-```
-
-![](README-images/order_example-1.png)
-
-Changing the Type Colors
-------------------------
-
-You can control the type colors by using the `fill.colors` parameter. You need to specify a named character vector with the name as the type and the value as the color you want the type to be. For instance:
-
-``` r
-fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
-plot_cofeature_mat(in.df, fill.colors = fill.colors)
-```
-
-![](README-images/fill_colors_example-1.png)
-
-Adding Borders
---------------
-
-To add a border around the types (makes it easier to visualize the types), we can use the `tile.col` parameter:
-
-``` r
-plot_cofeature_mat(in.df, tile.col = "black")
-```
-
-![](README-images/tile_col_example-1.png)
+-   Custom colors for each type (`fill.colors`)
+-   Custom ordering of features and samples (`feature.order` and `sample.id.order` respectively)
+-   Add borders around each type (`tile.col`)
