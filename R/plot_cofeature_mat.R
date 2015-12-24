@@ -133,10 +133,9 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
 
   # Set sample order
   message("Setting sample order")
-  mutate.call <- lazyeval::interp(~ as.numeric(
-                                      factor(sampleID, 
-                                             levels = rev(sample.id.order))),
-                                  feature = as.name("sampleID"))
+  mutate.call <- lazyeval::interp(~ factor(sampleID, 
+                                           levels = rev(sample.id.order)),
+                                  sampleID = as.name("sampleID"))
   in.df <- dplyr::mutate_(in.df, 
                           .dots = setNames(list(mutate.call), "sampleID"))
 
