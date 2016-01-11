@@ -83,12 +83,6 @@ There are many different parameters that can be passed into the `plot_cofeature_
 
 # Citing cofeatureR
 
-From within R,
-
-```{r, eval = FALSE}
-citation(package = "cofeatureR")
-```
-
 ```{r, results = "asis", echo = FALSE}
 citation(package = "cofeatureR")
 ```

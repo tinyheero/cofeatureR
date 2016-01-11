@@ -73,12 +73,6 @@ There are many different parameters that can be passed into the `plot_cofeature_
 Citing cofeatureR
 =================
 
-From within R,
-
-``` r
-citation(package = "cofeatureR")
-```
-
 To cite package 'cofeatureR' in publications use:
 
 Fong Chun Chan (2015). cofeatureR: Generate Cofeature Matrices. R package version 1.0.0. <http://CRAN.R-project.org/package=cofeatureR>
