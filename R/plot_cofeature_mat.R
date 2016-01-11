@@ -126,7 +126,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   message("Setting feature order")
   mutate.call <- lazyeval::interp(~ as.numeric(
                                       factor(feature, 
-                                             levels = rev(feature.order))),
+                                             levels = feature.order)),
                                   feature = as.name("feature"))
   in.df <- dplyr::mutate_(in.df, 
                           .dots = setNames(list(mutate.call), "feature"))
@@ -134,7 +134,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
   # Set sample order
   message("Setting sample order")
   mutate.call <- lazyeval::interp(~ factor(sampleID, 
-                                           levels = rev(sample.id.order)),
+                                           levels = sample.id.order),
                                   sampleID = as.name("sampleID"))
   in.df <- dplyr::mutate_(in.df, 
                           .dots = setNames(list(mutate.call), "sampleID"))
@@ -164,7 +164,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                           height = "height",
                           fill = "type")) +
     ggplot2::scale_y_discrete(limits = 1:length(feature.order), 
-                              labels = rev(feature.order)) +
+                              labels = feature.order) +
     ggplot2::ylab("Feature") +
     ggplot2::xlab("Sample ID")
 
