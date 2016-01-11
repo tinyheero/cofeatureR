@@ -76,9 +76,13 @@ Citing cofeatureR
 From within R,
 
 ``` r
-toBibtex(citation(package = "cofeatureR"))
+citation(package = "cofeatureR")
 ```
 
-Producing the following BibTeX entry:
+To cite package 'cofeatureR' in publications use:
+
+Fong Chun Chan (2015). cofeatureR: Generate Cofeature Matrices. R package version 1.0.0. <http://CRAN.R-project.org/package=cofeatureR>
+
+A BibTeX entry for LaTeX users is
 
 @Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, year = {2015}, note = {R package version 1.0.0}, url = {<http://CRAN.R-project.org/package=cofeatureR>}, }

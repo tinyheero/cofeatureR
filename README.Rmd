@@ -86,11 +86,9 @@ There are many different parameters that can be passed into the `plot_cofeature_
 From within R,
 
 ```{r, eval = FALSE}
-toBibtex(citation(package = "cofeatureR"))
+citation(package = "cofeatureR")
 ```
 
-Producing the following BibTeX entry:
-
 ```{r, results = "asis", echo = FALSE}
-toBibtex(citation(package = "cofeatureR"))
+citation(package = "cofeatureR")
 ```
