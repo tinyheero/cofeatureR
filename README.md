@@ -78,8 +78,8 @@ Citing cofeatureR
 
 To cite package 'cofeatureR' in publications use:
 
-Fong Chun Chan (). cofeatureR: Generate Cofeature Matrices. R package version 1.0.0.9000. <https://github.com/tinyheero/cofeatureR>
+Fong Chun Chan (). cofeatureR: Generate Cofeature Matrices. R package version 1.0.1. <https://github.com/tinyheero/cofeatureR>
 
 A BibTeX entry for LaTeX users is
 
-@Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, note = {R package version 1.0.0.9000}, url = {<https://github.com/tinyheero/cofeatureR>}, }
+@Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, note = {R package version 1.0.1}, url = {<https://github.com/tinyheero/cofeatureR>}, }
