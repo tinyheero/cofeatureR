@@ -30,7 +30,7 @@ sample.id.order <- c("sampleA", "sampleB", "sampleC")
 in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3)
 fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
  
-plot_cofeature_mat(in.df)
+plot_cofeature_mat(in.df, tile.col = "black")
 ```
 
 # Installation

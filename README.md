@@ -73,10 +73,13 @@ There are many different parameters that can be passed into the `plot_cofeature_
 Citing cofeatureR
 =================
 
+    #> Warning in citation(package = "cofeatureR"): no date field in DESCRIPTION
+    #> file of package 'cofeatureR'
+
 To cite package 'cofeatureR' in publications use:
 
-Fong Chun Chan (2015). cofeatureR: Generate Cofeature Matrices. R package version 1.0.0. <http://CRAN.R-project.org/package=cofeatureR>
+Fong Chun Chan (). cofeatureR: Generate Cofeature Matrices. R package version 1.0.0.9000. <https://github.com/tinyheero/cofeatureR>
 
 A BibTeX entry for LaTeX users is
 
-@Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, year = {2015}, note = {R package version 1.0.0}, url = {<http://CRAN.R-project.org/package=cofeatureR>}, }
+@Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, note = {R package version 1.0.0.9000}, url = {<https://github.com/tinyheero/cofeatureR>}, }
