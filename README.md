@@ -66,6 +66,19 @@ Notice how we are NOT restricted to have only one type per feature-sample. In ot
 
 There are many different parameters that can be passed into the `plot_cofeature_mat` for customization of the plot. For instance
 
--   Custom colors for each type (`fill.colors`)
--   Custom ordering of features and samples (`feature.order` and `sample.id.order` respectively)
--   Add borders around each type (`tile.col`)
+-   `fill.colors`: Custom colors for each type.
+-   `feature.order` and `sample.id.order`: Custom ordering of features and samples respectively.
+-   `tile.col`: Add borders around each type.
+
+Citing cofeatureR
+=================
+
+From within R,
+
+``` r
+toBibtex(citation(package = "cofeatureR"))
+```
+
+Producing the following BibTeX entry:
+
+@Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, year = {2015}, note = {R package version 1.0.0}, url = {<http://CRAN.R-project.org/package=cofeatureR>}, }
