@@ -2,7 +2,7 @@ Package: cofeatureR
 Title: Generate Cofeature Matrices
 Version: 1.0.1
 Authors@R: 
-	person("Fong Chun", "Chan", , email = "fongchunchan@gmail.com", role = c("aut", "cre"))
+	person("Fong Chun", "Chan", email = "fongchunchan@gmail.com", role = c("aut", "cre"))
 Description: Generate cofeature (feature by sample) matrices. The package 
   utilizies ggplot2::geom_tile to generate the matrix allowing for easy
   additions from the base matrix.
