@@ -164,7 +164,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                           height = "height",
                           fill = "type")) +
     ggplot2::scale_y_discrete(limits = 1:length(feature.order), 
-                              labels = feature.order) +
+                              labels = rev(feature.order)) +
     ggplot2::ylab("Feature") +
     ggplot2::xlab("Sample ID")
 
