@@ -32,7 +32,7 @@ The main function of cofeatureR is the `plot_cofeature_mat` function. It will pr
 -   sampleID: Sample name
 -   type: Type associated with the feature-sample.
 
-For instance in the field of cancer genomics, we are often interested in knowing how differents mutations (type) in different samples (sampleID) correlate between different genes (feature). The input data.frame would have this format:
+For instance in the field of cancer genomics, we are often interested in knowing how different mutations (type) in different samples (sampleID) correlate between genes (feature). The input data.frame would have this format:
 
 ``` r
 library("cofeatureR")
@@ -62,9 +62,9 @@ plot_cofeature_mat(in.df, tile.col = "black")
 
 ![](README-images/how_to_use_example-1.png)
 
-Notice how we are NOT restricted to have only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
+Notice how we are NOT restricted to having only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
 
-There are many different parameters that can be passed into the `plot_cofeature_mat` for customization of the plot. For instance
+There are many different parameters that can be passed into the `plot_cofeature_mat` for customization of the plot. For instance:
 
 -   `fill.colors`: Custom colors for each type.
 -   `feature.order` and `sample.id.order`: Custom ordering of features and samples respectively.
@@ -73,13 +73,10 @@ There are many different parameters that can be passed into the `plot_cofeature_
 Citing cofeatureR
 =================
 
-    #> Warning in citation(package = "cofeatureR"): no date field in DESCRIPTION
-    #> file of package 'cofeatureR'
-
 To cite package 'cofeatureR' in publications use:
 
-Fong Chun Chan (). cofeatureR: Generate Cofeature Matrices. R package version 1.0.1. <https://github.com/tinyheero/cofeatureR>
+Fong Chun Chan (2016). cofeatureR: Generate Cofeature Matrices. R package version 1.0.1. <http://CRAN.R-project.org/package=cofeatureR>
 
 A BibTeX entry for LaTeX users is
 
-@Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, note = {R package version 1.0.1}, url = {<https://github.com/tinyheero/cofeatureR>}, }
+@Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author = {Fong Chun Chan}, year = {2016}, note = {R package version 1.0.1}, url = {<http://CRAN.R-project.org/package=cofeatureR>}, }

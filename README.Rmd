@@ -57,7 +57,7 @@ The main function of cofeatureR is the `plot_cofeature_mat` function. It will pr
 * sampleID: Sample name
 * type: Type associated with the feature-sample.
 
-For instance in the field of cancer genomics, we are often interested in knowing how differents mutations (type) in different samples (sampleID) correlate between different genes (feature). The input data.frame would have this format:
+For instance in the field of cancer genomics, we are often interested in knowing how different mutations (type) in different samples (sampleID) correlate between genes (feature). The input data.frame would have this format:
 
 ```{r}
 library("cofeatureR")
@@ -75,7 +75,7 @@ This input data.frame can now be used as input into `plot_cofeature_mat`:
 plot_cofeature_mat(in.df, tile.col = "black")
 ```
 
-Notice how we are NOT restricted to have only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
+Notice how we are NOT restricted to having only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
 
 There are many different parameters that can be passed into the `plot_cofeature_mat` for customization of the plot. For instance:
 
