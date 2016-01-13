@@ -1,3 +1,10 @@
+## Release summary
+
+This is a resubmission:
+
+* Fix spelling mistake
+* Switching to ggplot2::geom_tile()
+
 ## Test environments
 
 * local OS X install, 3.2.2
