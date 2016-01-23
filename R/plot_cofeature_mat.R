@@ -20,24 +20,24 @@
 #'   used
 #' @param rotate.x.labels Rotate the x-axes labels by a certain degree
 #' @param missing.fill.col Color of the cell that has missing values
-#' @param dot.size Column name indicating the size of the 
-#'   ggplot2::geom_point().
-#' @param tile.flag Boolean to turn off ggplot2::geom_tile(). This is useful for
-#'   when we only want to show ggplot2::geom_point() through the dot.size 
-#'   parameter.
+#' @param dot.flag Boolean to turn on/off dots (dot.flag)
+#' @param dot.size Column name indicating the size of the dots. Only takes
+#'   effect if dot.flag is TRUE.
+#' @param tile.flag Boolean to turn on/off tiles (tile.flag)
 #' @export
 #' @examples
 #' v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 #' v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
 #' v3 <- c("Deletion", "Deletion", "SNV", "Rearrangement", "SNV", "Rearrangement", "SNV")
 #' v4 <- c(0.05, 0.5, 0.25, 0.01, 0.03, 0.24, 0.89)
+#' v5 <- c(1, 2, 1, 1, 2, 2, 1)
 #' feature.order <- c("RCOR1", "NCOR1", "LCOR")
 #' sample.id.order <- c("sampleA", "sampleB", "sampleC")
 #' in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3, 
-#'   p_value = -log10(v4))
+#'   p_value = -log10(v4), dir_flag = v5)
 #' fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
 #'  
-#' plot_cofeature_mat(in.df, dot.size = "p_value", tile.flag = FALSE)
+#' plot_cofeature_mat(in.df)
 #' 
 #' # With black tile color
 #' plot_cofeature_mat(in.df, tile.col = "black")
@@ -61,10 +61,18 @@
 #' # multiple features
 #' plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors = fill.colors,
 #'   type.display.mode = "single", type.order = c("Rearrangement", "SNV", "Deletion"))
+#'
+#' # Add dots to tiles for an additional layer of information
+#' plot_cofeature_mat(in.df, dot.size = "p_value")
+#' 
+#' # Only display dots
+#' plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value", 
+#'   tile.flag = FALSE)
 plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.colors,
                              type.display.mode = c("multiple", "single"), 
                              type.order, tile.col = NA, rotate.x.labels, 
-                             missing.fill.col, dot.size, tile.flag = TRUE) {
+                             missing.fill.col, dot.flag = FALSE, dot.size, 
+                             dot.col, tile.flag = TRUE) {
 
   if (!missing(missing.fill.col)) {
     message("Detected missing.fill.col parameter")
@@ -210,9 +218,14 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                                                          vjust = 1))
   }
 
-  if (!missing(dot.size)) {
-    p1 <- p1 +
-      ggplot2::geom_point(ggplot2::aes_string(size = dot.size))
+  if (dot.flag) {
+    if (!missing(dot.size)) {
+      p1 <- p1 +
+        ggplot2::geom_point(ggplot2::aes_string(size = dot.size))
+    } else {
+      p1 <- p1 +
+        ggplot2::geom_point()
+    }
   }
   p1
 }
