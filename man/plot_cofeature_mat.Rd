@@ -6,7 +6,8 @@
 \usage{
 plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors,
   type.display.mode = c("multiple", "single"), type.order, tile.col = NA,
-  rotate.x.labels, missing.fill.col)
+  rotate.x.labels, missing.fill.col, dot.flag = FALSE, dot.size,
+  tile.flag = TRUE)
 }
 \arguments{
 \item{in.df}{A 3 column (feature, sampleID, type) data.frame object}
@@ -34,6 +35,13 @@ used}
 \item{rotate.x.labels}{Rotate the x-axes labels by a certain degree}
 
 \item{missing.fill.col}{Color of the cell that has missing values}
+
+\item{dot.flag}{Boolean to turn on/off dots (dot.flag)}
+
+\item{dot.size}{Column name indicating the size of the dots. Only takes
+effect if dot.flag is TRUE.}
+
+\item{tile.flag}{Boolean to turn on/off tiles (tile.flag)}
 }
 \description{
 Generates a ggplot2::geom_tile plot of features by sample.
@@ -43,9 +51,12 @@ It is able to deal with multiple types affecting the same sample.
 v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
 v3 <- c("Deletion", "Deletion", "SNV", "Rearrangement", "SNV", "Rearrangement", "SNV")
+v4 <- c(0.05, 0.5, 0.25, 0.01, 0.03, 0.24, 0.89)
+v5 <- c(1, 2, 1, 1, 2, 2, 1)
 feature.order <- c("RCOR1", "NCOR1", "LCOR")
 sample.id.order <- c("sampleA", "sampleB", "sampleC")
-in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3)
+in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3,
+  p_value = -log10(v4), dir_flag = factor(v5))
 fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
 
 plot_cofeature_mat(in.df)
@@ -72,5 +83,12 @@ plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors = fill.col
 # multiple features
 plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors = fill.colors,
   type.display.mode = "single", type.order = c("Rearrangement", "SNV", "Deletion"))
+
+# Add dots to tiles for an additional layer of information
+plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value")
+
+# Only display dots
+plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value",
+  tile.flag = FALSE)
 }
 
