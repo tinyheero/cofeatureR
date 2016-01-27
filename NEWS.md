@@ -1,3 +1,11 @@
+# cofeatureR 1.0.1.9002
+
+* Added drop.x parameter
+
+# cofeatureR 1.0.1.9001
+
+* Added ability to add dots to the cofeature matrices
+
 # cofeatureR 1.0.1
 
 * Fixed an issue with sample labels not being displayed

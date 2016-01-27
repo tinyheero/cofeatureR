@@ -6,8 +6,8 @@
 \usage{
 plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors,
   type.display.mode = c("multiple", "single"), type.order, tile.col = NA,
-  rotate.x.labels, missing.fill.col, dot.flag = FALSE, dot.size,
-  tile.flag = TRUE)
+  rotate.x.labels, missing.fill.col, dot.flag = FALSE, dot.size, dot.col,
+  tile.flag = TRUE, drop.x = FALSE)
 }
 \arguments{
 \item{in.df}{A 3 column (feature, sampleID, type) data.frame object}
@@ -56,7 +56,7 @@ v5 <- c(1, 2, 1, 1, 2, 2, 1)
 feature.order <- c("RCOR1", "NCOR1", "LCOR")
 sample.id.order <- c("sampleA", "sampleB", "sampleC")
 in.df <- dplyr::data_frame(feature = v1, sampleID = v2, type = v3,
-  p_value = -log10(v4), dir_flag = factor(v5))
+  p_value = -log10(v4), dir_flag = v5)
 fill.colors <- c("Deletion" = "Blue", "Rearrangement" = "Green", "SNV" = "Red")
 
 plot_cofeature_mat(in.df)
@@ -85,10 +85,19 @@ plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors = fill.col
   type.display.mode = "single", type.order = c("Rearrangement", "SNV", "Deletion"))
 
 # Add dots to tiles for an additional layer of information
-plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value")
+plot_cofeature_mat(in.df, dot.size = "p_value")
 
 # Only display dots
 plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value",
   tile.flag = FALSE)
+
+# Samples will not be dropped
+sample.id.order.new <- c("sampleA", "sampleB", "sampleC", "sampleD")
+plot_cofeature_mat(in.df, tile.col = "black",
+  sample.id.order = sample.id.order.new)
+
+# Samples can be dropped by setting drop.x = TRUE
+plot_cofeature_mat(in.df, tile.col = "black",
+  sample.id.order = sample.id.order.new, drop.x = TRUE)
 }
 
