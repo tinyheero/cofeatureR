@@ -68,11 +68,20 @@
 #' # Only display dots
 #' plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value", 
 #'   tile.flag = FALSE)
+#'
+#' # Samples will not be dropped
+#' sample.id.order.new <- c("sampleA", "sampleB", "sampleC", "sampleD")
+#' plot_cofeature_mat(in.df, tile.col = "black", 
+#'   sample.id.order = sample.id.order.new)
+#'
+#' # Samples can be dropped by setting drop.x = TRUE
+#' plot_cofeature_mat(in.df, tile.col = "black", 
+#'   sample.id.order = sample.id.order.new, drop.x = TRUE)
 plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.colors,
                              type.display.mode = c("multiple", "single"), 
                              type.order, tile.col = NA, rotate.x.labels, 
                              missing.fill.col, dot.flag = FALSE, dot.size, 
-                             dot.col, tile.flag = TRUE) {
+                             dot.col, tile.flag = TRUE, drop.x = FALSE) {
 
   if (!missing(missing.fill.col)) {
     message("Detected missing.fill.col parameter")
@@ -176,6 +185,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                           y = "feature_shift", 
                           height = "height",
                           fill = "type")) +
+    ggplot2::scale_x_discrete(drop = drop.x) +
     ggplot2::scale_y_discrete(limits = 1:length(feature.order), 
                               labels = feature.order) +
     ggplot2::ylab("Feature") +
