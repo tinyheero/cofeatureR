@@ -1,6 +1,7 @@
 # cofeatureR 1.0.1.9002
 
 * Added drop.x parameter
+* Added Travis-CI
 
 # cofeatureR 1.0.1.9001
 
