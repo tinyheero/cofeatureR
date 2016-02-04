@@ -6,7 +6,7 @@ cofeatureR
 
 cofeatureR is an R Package that provides functions for plotting cofeature matrices (aka. feature-sample matrices). For example:
 
-![](README-images/example-1.png)<!-- -->
+![](README-images/example-1.png)
 
 Installation
 ============
