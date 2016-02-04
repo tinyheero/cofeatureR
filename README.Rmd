@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 # cofeatureR
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/cofeatureR)](http://cran.r-project.org/package=cofeatureR)
+[![Travis-CI Build Status](https://travis-ci.org/tinyheero/cofeatureR.svg?branch=master)](https://travis-ci.org/tinyheero/cofeatureR)
 
 cofeatureR is an R Package that provides functions for plotting cofeature matrices (aka. feature-sample matrices). For example:
 

@@ -6,3 +6,4 @@
 ^cran-comments\.md$
 ^Makefile$
 
+^\.travis\.yml$

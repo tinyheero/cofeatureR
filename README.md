@@ -2,11 +2,11 @@
 cofeatureR
 ==========
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cofeatureR)](http://cran.r-project.org/package=cofeatureR)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cofeatureR)](http://cran.r-project.org/package=cofeatureR) [![Travis-CI Build Status](https://travis-ci.org/tinyheero/cofeatureR.svg?branch=master)](https://travis-ci.org/tinyheero/cofeatureR)
 
 cofeatureR is an R Package that provides functions for plotting cofeature matrices (aka. feature-sample matrices). For example:
 
-![](README-images/example-1.png)
+![](README-images/example-1.png)<!-- -->
 
 Installation
 ============
@@ -60,7 +60,7 @@ This input data.frame can now be used as input into `plot_cofeature_mat`:
 plot_cofeature_mat(in.df, tile.col = "black")
 ```
 
-![](README-images/how_to_use_example-1.png)
+![](README-images/how_to_use_example-1.png)<!-- -->
 
 Notice how we are NOT restricted to having only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
 
