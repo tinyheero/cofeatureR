@@ -24,6 +24,7 @@
 #' @param dot.size Column name indicating the size of the dots. Only takes
 #'   effect if dot.flag is TRUE.
 #' @param tile.flag Boolean to turn on/off tiles (tile.flag)
+#' @param drop.x Boolean to drop levels (from a factor) in the x dimension.
 #' @export
 #' @examples
 #' v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
@@ -81,7 +82,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                              type.display.mode = c("multiple", "single"), 
                              type.order, tile.col = NA, rotate.x.labels, 
                              missing.fill.col, dot.flag = FALSE, dot.size, 
-                             dot.col, tile.flag = TRUE, drop.x = FALSE) {
+                             tile.flag = TRUE, drop.x = FALSE) {
 
   if (!missing(missing.fill.col)) {
     message("Detected missing.fill.col parameter")
