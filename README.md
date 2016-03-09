@@ -17,6 +17,12 @@ To get the released version from CRAN:
 install.packages("cofeatureR")
 ```
 
+You can also get cofeatureR through conda:
+
+``` bash
+conda install -c fongchun r-cofeaturer
+```
+
 To install the latest developmental version from github:
 
 ``` r
@@ -60,7 +66,7 @@ This input data.frame can now be used as input into `plot_cofeature_mat`:
 plot_cofeature_mat(in.df, tile.col = "black")
 ```
 
-![](README-images/how_to_use_example-1.png)<!-- -->
+![](README-images/how_to_use_example-1.png)
 
 Notice how we are NOT restricted to having only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
 

@@ -44,6 +44,12 @@ To get the released version from CRAN:
 install.packages("cofeatureR")
 ```
 
+You can also get cofeatureR through conda:
+
+```{bash, eval = FALSE}
+conda install -c fongchun r-cofeaturer
+```
+
 To install the latest developmental version from github:
 
 ```{r, eval = FALSE}
