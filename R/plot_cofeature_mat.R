@@ -84,6 +84,10 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                              missing.fill.col, dot.flag = FALSE, dot.size, 
                              tile.flag = TRUE, drop.x = FALSE) {
 
+  if (!"feature" %in% colnames(in.df)) {
+    stop("Missing required column name feature in input data.frame")
+  }
+
   if (!missing(missing.fill.col)) {
     message("Detected missing.fill.col parameter")
     in.df.grid <- expand.grid(feature = unique(in.df[["feature"]]),
