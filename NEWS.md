@@ -1,10 +1,7 @@
-# cofeatureR 1.0.1.9002
+# Next Release
 
 * Added drop.x parameter
 * Added Travis-CI
-
-# cofeatureR 1.0.1.9001
-
 * Added ability to add dots to the cofeature matrices
 
 # cofeatureR 1.0.1
