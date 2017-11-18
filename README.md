@@ -2,7 +2,7 @@
 cofeatureR
 ==========
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cofeatureR)](http://cran.r-project.org/package=cofeatureR) [![Travis-CI Build Status](https://travis-ci.org/tinyheero/cofeatureR.svg?branch=master)](https://travis-ci.org/tinyheero/cofeatureR) [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/tinyheero)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cofeatureR)](http://cran.r-project.org/package=cofeatureR) [![Travis-CI Build Status](https://travis-ci.org/tinyheero/cofeatureR.svg?branch=master)](https://travis-ci.org/tinyheero/cofeatureR) [![Downloads per month](http://cranlogs.r-pkg.org/badges/cofeatureR)](https://cran.rstudio.com/web/packages/cofeatureR) [![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/cofeatureR)](https://cran.rstudio.com/web/packages/cofeatureR) [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/tinyheero)
 
 cofeatureR is an R Package that provides functions for plotting cofeature matrices (aka. feature-sample matrices). For example:
 
