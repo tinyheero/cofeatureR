@@ -10,7 +10,7 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-images/"
+  fig.path = "man/figures/"
 )
 ```
 
@@ -81,7 +81,7 @@ knitr::kable(in.df)
 
 This input data.frame can now be used as input into `plot_cofeature_mat`:
 
-```{r how_to_use_example, message = FALSE}
+```{r how-to-use-example, message = FALSE}
 plot_cofeature_mat(in.df, tile.col = "black")
 ```
 
