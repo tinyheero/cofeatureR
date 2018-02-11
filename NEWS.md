@@ -1,3 +1,9 @@
+# Next Release
+
+* Added drop.x parameter
+* Added Travis-CI
+* Added ability to add dots to the cofeature matrices
+
 # cofeatureR 1.0.1
 
 * Fixed an issue with sample labels not being displayed

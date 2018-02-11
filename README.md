@@ -2,11 +2,11 @@
 cofeatureR
 ==========
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cofeatureR)](http://cran.r-project.org/package=cofeatureR) [![Travis-CI Build Status](https://travis-ci.org/tinyheero/cofeatureR.svg?branch=master)](https://travis-ci.org/tinyheero/cofeatureR)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cofeatureR)](http://cran.r-project.org/package=cofeatureR) [![Travis-CI Build Status](https://travis-ci.org/tinyheero/cofeatureR.svg?branch=master)](https://travis-ci.org/tinyheero/cofeatureR) [![Downloads per month](http://cranlogs.r-pkg.org/badges/cofeatureR)](https://cran.rstudio.com/web/packages/cofeatureR) [![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/cofeatureR)](https://cran.rstudio.com/web/packages/cofeatureR) [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/tinyheero)
 
 cofeatureR is an R Package that provides functions for plotting cofeature matrices (aka. feature-sample matrices). For example:
 
-![](README-images/example-1.png)<!-- -->
+![](README-images/example-1.png)
 
 Installation
 ============
@@ -15,6 +15,12 @@ To get the released version from CRAN:
 
 ``` r
 install.packages("cofeatureR")
+```
+
+You can also get cofeatureR through conda:
+
+``` bash
+conda install -c fongchun r-cofeaturer
 ```
 
 To install the latest developmental version from github:
@@ -60,7 +66,7 @@ This input data.frame can now be used as input into `plot_cofeature_mat`:
 plot_cofeature_mat(in.df, tile.col = "black")
 ```
 
-![](README-images/how_to_use_example-1.png)<!-- -->
+![](README-images/how_to_use_example-1.png)
 
 Notice how we are NOT restricted to having only one type per feature-sample. In other words, a feature-sample may have multiple types and `plot_cofeature_mat` will display all of the types.
 

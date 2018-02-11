@@ -24,6 +24,7 @@
 #' @param dot.size Column name indicating the size of the dots. Only takes
 #'   effect if dot.flag is TRUE.
 #' @param tile.flag Boolean to turn on/off tiles (tile.flag)
+#' @param drop.x Boolean to drop levels (from a factor) in the x dimension.
 #' @export
 #' @examples
 #' v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
@@ -68,11 +69,24 @@
 #' # Only display dots
 #' plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value", 
 #'   tile.flag = FALSE)
+#'
+#' # Samples will not be dropped
+#' sample.id.order.new <- c("sampleA", "sampleB", "sampleC", "sampleD")
+#' plot_cofeature_mat(in.df, tile.col = "black", 
+#'   sample.id.order = sample.id.order.new)
+#'
+#' # Samples can be dropped by setting drop.x = TRUE
+#' plot_cofeature_mat(in.df, tile.col = "black", 
+#'   sample.id.order = sample.id.order.new, drop.x = TRUE)
 plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.colors,
                              type.display.mode = c("multiple", "single"), 
                              type.order, tile.col = NA, rotate.x.labels, 
                              missing.fill.col, dot.flag = FALSE, dot.size, 
-                             dot.col, tile.flag = TRUE) {
+                             tile.flag = TRUE, drop.x = FALSE) {
+
+  if (!"feature" %in% colnames(in.df)) {
+    stop("Missing required column name feature in input data.frame")
+  }
 
   if (!missing(missing.fill.col)) {
     message("Detected missing.fill.col parameter")
@@ -176,6 +190,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
                           y = "feature_shift", 
                           height = "height",
                           fill = "type")) +
+    ggplot2::scale_x_discrete(drop = drop.x) +
     ggplot2::scale_y_discrete(limits = 1:length(feature.order), 
                               labels = feature.order) +
     ggplot2::ylab("Feature") +
