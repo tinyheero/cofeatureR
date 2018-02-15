@@ -9,6 +9,8 @@ Status](https://travis-ci.org/tinyheero/cofeatureR.svg?branch=master)](https://t
 month](http://cranlogs.r-pkg.org/badges/cofeatureR)](https://cran.rstudio.com/web/packages/cofeatureR)
 [![Total
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/cofeatureR)](https://cran.rstudio.com/web/packages/cofeatureR)
+[![Anaconda-Server
+Badge](https://anaconda.org/fongchun/r-cofeaturer/badges/version.svg)](https://anaconda.org/fongchun/r-cofeaturer)
 [![Say
 Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/tinyheero)
 
@@ -107,10 +109,10 @@ Citing cofeatureR
 To cite package ‘cofeatureR’ in publications use:
 
 Fong Chun Chan (NA). cofeatureR: Generate Cofeature Matrices. R package
-version 1.0.1.9002. <https://github.com/tinyheero/cofeatureR>
+version 1.1.0. <https://github.com/tinyheero/cofeatureR>
 
 A BibTeX entry for LaTeX users is
 
 @Manual{, title = {cofeatureR: Generate Cofeature Matrices}, author =
-{Fong Chun Chan}, note = {R package version 1.0.1.9002}, url =
+{Fong Chun Chan}, note = {R package version 1.1.0}, url =
 {<https://github.com/tinyheero/cofeatureR>}, }
