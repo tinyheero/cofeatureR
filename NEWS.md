@@ -1,8 +1,10 @@
-# Next Release
+# cofeatureR 1.1.0
 
 * Added drop.x parameter
 * Added Travis-CI
 * Added ability to add dots to the cofeature matrices
+* Moved figures to the `man/figures` folder (#5)
+* Added the ability to specify width of borders (#4)
 
 # cofeatureR 1.0.1
 
