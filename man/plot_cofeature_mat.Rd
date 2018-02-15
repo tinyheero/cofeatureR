@@ -52,6 +52,7 @@ Generates a ggplot2::geom_tile plot of features by sample.
 It is able to deal with multiple types affecting the same sample.
 }
 \examples{
+\dontrun{
 v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
 v3 <- c("Deletion", "Deletion", "SNV", "Rearrangement", "SNV", "Rearrangement", "SNV")
@@ -102,4 +103,5 @@ plot_cofeature_mat(in.df, tile.col = "black",
 # Samples can be dropped by setting drop.x = TRUE
 plot_cofeature_mat(in.df, tile.col = "black", 
   sample.id.order = sample.id.order.new, drop.x = TRUE)
+}
 }

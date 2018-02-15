@@ -1,17 +1,13 @@
-## Release summary
+# Test environments
 
-This is a resubmission:
-
-* Fix spelling mistake
-* Switching to ggplot2::geom_tile()
-
-## Test environments
-
-* local OS X install, 3.2.2
+* local OS X install, 3.4.1
+* ubuntu 14.04.5 LTS (on travis-ci), 3.4.2
 * win-builder (devel and release)
 
-## R CMD check results
-There were no ERRORs, WARNINGs. There is 1 note from checking CRAN incoming feasibility reminding who is the maintainer (me).
+# R CMD check results
 
-## Downstream dependencies
+There were no ERRORs, or WARNINGs. 
+
+# Downstream dependencies
+
 There are currently no downstream dependencies for this package.

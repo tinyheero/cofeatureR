@@ -28,6 +28,7 @@
 #' @param drop.x Boolean to drop levels (from a factor) in the x dimension.
 #' @export
 #' @examples
+#' \dontrun{
 #' v1 <- c("RCOR1", "NCOR1", "LCOR", "RCOR1", "RCOR1", "RCOR1", "RCOR1")
 #' v2 <- c("sampleA", "sampleC", "sampleB", "sampleC", "sampleA", "sampleC", "sampleC")
 #' v3 <- c("Deletion", "Deletion", "SNV", "Rearrangement", "SNV", "Rearrangement", "SNV")
@@ -78,6 +79,7 @@
 #' # Samples can be dropped by setting drop.x = TRUE
 #' plot_cofeature_mat(in.df, tile.col = "black", 
 #'   sample.id.order = sample.id.order.new, drop.x = TRUE)
+#' }
 plot_cofeature_mat <- function(
   in.df, 
   feature.order, sample.id.order, 
