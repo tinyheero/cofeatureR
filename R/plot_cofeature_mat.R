@@ -15,15 +15,16 @@
 #' @param type.display.mode Specify whether multiple or a single feature type 
 #'   can appear in the same feature/sample cell
 #' @param type.order Specify the "priority" of the feature types. This only 
-#'   has an effect when type.display.mode is set to single
-#' @param tile.col Border color of each cell. If not yet, no border color is 
-#'   used
+#'   has an effect when type.display.mode is set to single.
+#' @param tile.col Border color of each cell. If not set, no border color is 
+#'   used.
 #' @param rotate.x.labels Rotate the x-axes labels by a certain degree
 #' @param missing.fill.col Color of the cell that has missing values
 #' @param dot.flag Boolean to turn on/off dots (dot.flag)
 #' @param dot.size Column name indicating the size of the dots. Only takes
 #'   effect if dot.flag is TRUE.
 #' @param tile.flag Boolean to turn on/off tiles (tile.flag)
+#' @param tile.border.size Integer to indicate the size of the tile borders. 
 #' @param drop.x Boolean to drop levels (from a factor) in the x dimension.
 #' @export
 #' @examples
@@ -44,8 +45,7 @@
 #' plot_cofeature_mat(in.df, tile.col = "black")
 #'
 #' # Fill in missing values with a lightgrey color
-#' plot_cofeature_mat(in.df, tile.col = "black", 
-#'   missing.fill.col = "lightgrey")
+#' plot_cofeature_mat(in.df, tile.col = "black", missing.fill.col = "lightgrey")
 #'
 #' # Rotate x-axes labels by 90 degrees
 #' plot_cofeature_mat(in.df, rotate.x.labels = 90)
@@ -78,11 +78,18 @@
 #' # Samples can be dropped by setting drop.x = TRUE
 #' plot_cofeature_mat(in.df, tile.col = "black", 
 #'   sample.id.order = sample.id.order.new, drop.x = TRUE)
-plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.colors,
-                             type.display.mode = c("multiple", "single"), 
-                             type.order, tile.col = NA, rotate.x.labels, 
-                             missing.fill.col, dot.flag = FALSE, dot.size, 
-                             tile.flag = TRUE, drop.x = FALSE) {
+plot_cofeature_mat <- function(
+  in.df, 
+  feature.order, sample.id.order, 
+  fill.colors,
+  type.display.mode = c("multiple", "single"), type.order, 
+  tile.col = NA, 
+  rotate.x.labels, missing.fill.col, 
+  dot.flag = FALSE, dot.size, 
+  tile.flag = TRUE, 
+  drop.x = FALSE,
+  tile.border.size = 1
+) {
 
   if (!"feature" %in% colnames(in.df)) {
     stop("Missing required column name feature in input data.frame")
@@ -207,18 +214,7 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
         ggplot2::geom_tile(color = tile.col, size = 1)
     }
   } else {
-
-    # Plot two geom_tile. 1 for data present and 1 for data missing
-    filter.crit.1 <- lazyeval::interp(~ !is.na(type), 
-                                      .values = list(type = as.name("type")))
-    filter.crit.2 <- lazyeval::interp(~ is.na(type), 
-                                      .values = list(type = as.name("type")))
-
-    p1 <- p1 +
-      ggplot2::geom_tile(data = dplyr::filter_(in.df, filter.crit.1), 
-                         color = tile.col, size = 1) +
-      ggplot2::geom_tile(data = dplyr::filter_(in.df, filter.crit.2), 
-                         fill = missing.fill.col, color = tile.col, size = 1)
+    p1 <- add_tiles(p1, in.df, tile.col, missing.fill.col, tile.border.size)
   }
 
   if (rotate.x.labels == 90) {
@@ -242,5 +238,32 @@ plot_cofeature_mat <- function(in.df, feature.order, sample.id.order, fill.color
         ggplot2::geom_point()
     }
   }
+  p1
+}
+
+#' Add tiles to the ggplot2 
+#'
+#' @param p1 Existing ggplot2
+#' @inheritParams plot_cofeature_mat
+add_tiles <- function(p1, in.df, tile.col, missing.fill.col, tile.border.size) {
+
+  # Plot two geom_tile. 1 for data present and 1 for data missing
+  filter.crit.1 <- lazyeval::interp(~ !is.na(type), 
+                                    .values = list(type = as.name("type")))
+  filter.crit.2 <- lazyeval::interp(~ is.na(type), 
+                                    .values = list(type = as.name("type")))
+
+  # No borders for missing data.
+  p1 <- 
+    p1 +
+    ggplot2::geom_tile(
+      data = dplyr::filter_(in.df, filter.crit.1), 
+      color = tile.col, size = tile.border.size
+    ) +
+    ggplot2::geom_tile(
+      data = dplyr::filter_(in.df, filter.crit.2), 
+      fill = missing.fill.col, color = tile.col
+    )
+
   p1
 }

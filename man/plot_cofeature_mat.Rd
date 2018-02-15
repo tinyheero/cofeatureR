@@ -6,8 +6,8 @@
 \usage{
 plot_cofeature_mat(in.df, feature.order, sample.id.order, fill.colors,
   type.display.mode = c("multiple", "single"), type.order, tile.col = NA,
-  rotate.x.labels, missing.fill.col, dot.flag = FALSE, dot.size, dot.col,
-  tile.flag = TRUE)
+  rotate.x.labels, missing.fill.col, dot.flag = FALSE, dot.size,
+  tile.flag = TRUE, drop.x = FALSE, tile.border.size = 1)
 }
 \arguments{
 \item{in.df}{A 3 column (feature, sampleID, type) data.frame object}
@@ -27,10 +27,10 @@ automatically}
 can appear in the same feature/sample cell}
 
 \item{type.order}{Specify the "priority" of the feature types. This only 
-has an effect when type.display.mode is set to single}
+has an effect when type.display.mode is set to single.}
 
-\item{tile.col}{Border color of each cell. If not yet, no border color is 
-used}
+\item{tile.col}{Border color of each cell. If not set, no border color is 
+used.}
 
 \item{rotate.x.labels}{Rotate the x-axes labels by a certain degree}
 
@@ -42,6 +42,10 @@ used}
 effect if dot.flag is TRUE.}
 
 \item{tile.flag}{Boolean to turn on/off tiles (tile.flag)}
+
+\item{drop.x}{Boolean to drop levels (from a factor) in the x dimension.}
+
+\item{tile.border.size}{Integer to indicate the size of the tile borders.}
 }
 \description{
 Generates a ggplot2::geom_tile plot of features by sample.
@@ -65,8 +69,7 @@ plot_cofeature_mat(in.df)
 plot_cofeature_mat(in.df, tile.col = "black")
 
 # Fill in missing values with a lightgrey color
-plot_cofeature_mat(in.df, tile.col = "black", 
-  missing.fill.col = "lightgrey")
+plot_cofeature_mat(in.df, tile.col = "black", missing.fill.col = "lightgrey")
 
 # Rotate x-axes labels by 90 degrees
 plot_cofeature_mat(in.df, rotate.x.labels = 90)
@@ -90,4 +93,13 @@ plot_cofeature_mat(in.df, dot.size = "p_value")
 # Only display dots
 plot_cofeature_mat(in.df, dot.flag = TRUE, dot.size = "p_value", 
   tile.flag = FALSE)
+
+# Samples will not be dropped
+sample.id.order.new <- c("sampleA", "sampleB", "sampleC", "sampleD")
+plot_cofeature_mat(in.df, tile.col = "black", 
+  sample.id.order = sample.id.order.new)
+
+# Samples can be dropped by setting drop.x = TRUE
+plot_cofeature_mat(in.df, tile.col = "black", 
+  sample.id.order = sample.id.order.new, drop.x = TRUE)
 }
