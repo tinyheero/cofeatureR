@@ -1,3 +1,7 @@
+# cofeaturerR 1.1.1
+
+* Added the tibble R package as a dependency
+
 # cofeatureR 1.1.0
 
 * Added drop.x parameter
